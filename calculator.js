@@ -5,6 +5,8 @@ let zweiteZahl;
 let summe; 
 let rechenArt;
 let buffer=0;
+let komma = false;
+let zehntelstelle = 0
 
 losch.addEventListener("click",() => reset());
 x2.addEventListener("click",() => {saveOpperator("x2")});
@@ -25,27 +27,42 @@ sechs.addEventListener("click",() => {addToBuffer(6)});
 sieben.addEventListener("click",() => {addToBuffer(7)});
 acht.addEventListener("click",() => {addToBuffer(8)});
 neun.addEventListener("click",() => {addToBuffer(9)});
-punkt.addEventListener("click",() => {addToBuffer(".")});
+punkt.addEventListener("click",() => {dezimalSpass()});
 
+
+
+function dezimalSpass(){
+    komma = true;
+}
 function reset() {
     zwischenSpeicher = 0;
     ersteZahl = undefined;
     zweiteZahl = undefined;
     summe =0; 
-    buffer=0; 
+    buffer=0;
+    komma = false;
+    zehntelstelle = 0
+    console.clear();
 }
 
 function addToBuffer(num) {
+    if (!komma){
     buffer =(buffer *10 + num);
     console.log(buffer);
-};
+    } else{
+    zehntelstelle++;
+    buffer = buffer + num/(Math.pow(10,zehntelstelle));
+    }
+    console.log(buffer);
+}
+
 function saveOpperator (opp) {
     rechenArt= opp;
     saveNumber();    
-};
-function saveNumber() {
-    console.log("choosing",ersteZahl,zweiteZahl);
+}
 
+function saveNumber() {
+    komma = false;
     if (ersteZahl == undefined) {
         ersteZahl = buffer;
     } else {
@@ -53,10 +70,12 @@ function saveNumber() {
         chooseOpperator();
         ersteZahl = summe;
     }
+    console.log("choosing",ersteZahl,zweiteZahl);
     buffer = 0;
 
 
-};
+}
+
 function chooseOpperator() {
     if (zweiteZahl == undefined){
         return;
@@ -86,32 +105,29 @@ function chooseOpperator() {
     console.log("summe: ", summe);
     zweiteZahl = undefined;
     ersteZahl = undefined;
-};
-
-
-
+}
 
 function add() {
     return ersteZahl + zweiteZahl;  
-};
+}
    
 function sub() {
     return ersteZahl - zweiteZahl;       
-};
+}
 
 function multi() {
     return ersteZahl * zweiteZahl;
-};
+}
 
 function div() {
     return ersteZahl / zweiteZahl;
-};
+}
 
 function quadr() {
     return ersteZahl * ersteZahl;
-};
+}
 
 function root() {
     return Math.sqrt (ersteZahl);
-};
+}
 
