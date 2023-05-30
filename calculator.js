@@ -66,24 +66,17 @@ function saveNumber() {
     komma = false;
     if (ersteZahl == undefined) {
         ersteZahl = buffer;
-        // zeigsmir.textContent = ersteZahl;
     } else {
         zweiteZahl = buffer;
-        zeigsmir.textContent = zweiteZahl;
         chooseOpperator();
         ersteZahl = summe;
         zeigsmir.textContent = summe;
     }
     console.log("choosing",ersteZahl,zweiteZahl);
     buffer = 0;
-
-
 }
 
 function chooseOpperator() {
-    // if (zweiteZahl == undefined){
-    //     return;
-    // }
     switch (rechenArt) {
         case "-":
             summe = sub();
