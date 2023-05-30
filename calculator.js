@@ -1,0 +1,117 @@
+
+let zwischenSpeicher = 0;
+let ersteZahl;
+let zweiteZahl; 
+let summe; 
+let rechenArt;
+let buffer=0;
+
+losch.addEventListener("click",() => reset());
+x2.addEventListener("click",() => {saveOpperator("x2")});
+Wurzel.addEventListener("click",() => {saveOpperator("Wurzel")});
+geteilt.addEventListener("click",() => {saveOpperator("/")});
+mal.addEventListener("click",() => {saveOpperator("x")});
+minus.addEventListener("click",() => {saveOpperator("-")});
+plus.addEventListener("click",() => {saveOpperator("+")});
+gleich.addEventListener("click",() => {saveNumber("=")});
+
+n.addEventListener("click",() => {addToBuffer(0)});
+eins.addEventListener("click",() =>{addToBuffer(1)});
+zwei.addEventListener("click",() => {addToBuffer(2)});
+drei.addEventListener("click",() => {addToBuffer(3)});
+v.addEventListener("click",() => {addToBuffer(4)});
+funf.addEventListener("click",() => {addToBuffer(5)});
+sechs.addEventListener("click",() => {addToBuffer(6)});
+sieben.addEventListener("click",() => {addToBuffer(7)});
+acht.addEventListener("click",() => {addToBuffer(8)});
+neun.addEventListener("click",() => {addToBuffer(9)});
+punkt.addEventListener("click",() => {addToBuffer(".")});
+
+function reset() {
+    zwischenSpeicher = 0;
+    ersteZahl = undefined;
+    zweiteZahl = undefined;
+    summe =0; 
+    buffer=0; 
+}
+
+function addToBuffer(num) {
+    buffer =(buffer *10 + num);
+    console.log(buffer);
+};
+function saveOpperator (opp) {
+    rechenArt= opp;
+    saveNumber();    
+};
+function saveNumber() {
+    console.log("choosing",ersteZahl,zweiteZahl);
+
+    if (ersteZahl == undefined) {
+        ersteZahl = buffer;
+    } else {
+        zweiteZahl = buffer;
+        chooseOpperator();
+        ersteZahl = summe;
+    }
+    buffer = 0;
+
+
+};
+function chooseOpperator() {
+    if (zweiteZahl == undefined){
+        return;
+    }
+    switch (rechenArt) {
+        case "-":
+            summe = sub();
+            break;
+        case "+":
+            summe = add();
+            break;
+        case "x":
+            summe = multi();
+            break;
+        case "/":
+            summe = div();
+            break;
+        case "x2":
+            summe = quadr();
+            break;
+        case "Wurzel":
+            summe = root();
+            break;
+        default: 
+            break;
+    }
+    console.log("summe: ", summe);
+    zweiteZahl = undefined;
+    ersteZahl = undefined;
+};
+
+
+
+
+function add() {
+    return ersteZahl + zweiteZahl;  
+};
+   
+function sub() {
+    return ersteZahl - zweiteZahl;       
+};
+
+function multi() {
+    return ersteZahl * zweiteZahl;
+};
+
+function div() {
+    return ersteZahl / zweiteZahl;
+};
+
+function quadr() {
+    return ersteZahl * ersteZahl;
+};
+
+function root() {
+    return Math.sqrt (ersteZahl);
+};
+
