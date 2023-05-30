@@ -43,6 +43,7 @@ function reset() {
     komma = false;
     zehntelstelle = 0
     console.clear();
+    zeigsmir.textContent = 0;
 }
 
 function addToBuffer(num) {
@@ -53,7 +54,7 @@ function addToBuffer(num) {
     zehntelstelle++;
     buffer = buffer + num/(Math.pow(10,zehntelstelle));
     }
-    console.log(buffer);
+    zeigsmir.textContent = buffer;
 }
 
 function saveOpperator (opp) {
@@ -65,10 +66,13 @@ function saveNumber() {
     komma = false;
     if (ersteZahl == undefined) {
         ersteZahl = buffer;
+        // zeigsmir.textContent = ersteZahl;
     } else {
         zweiteZahl = buffer;
+        zeigsmir.textContent = zweiteZahl;
         chooseOpperator();
         ersteZahl = summe;
+        zeigsmir.textContent = summe;
     }
     console.log("choosing",ersteZahl,zweiteZahl);
     buffer = 0;
@@ -77,9 +81,9 @@ function saveNumber() {
 }
 
 function chooseOpperator() {
-    if (zweiteZahl == undefined){
-        return;
-    }
+    // if (zweiteZahl == undefined){
+    //     return;
+    // }
     switch (rechenArt) {
         case "-":
             summe = sub();
@@ -102,9 +106,10 @@ function chooseOpperator() {
         default: 
             break;
     }
-    console.log("summe: ", summe);
-    zweiteZahl = undefined;
-    ersteZahl = undefined;
+    zeigsmir.textContent = summe;
+    // console.log("summe: ", summe);
+    // zweiteZahl = undefined;
+    // ersteZahl = undefined;
 }
 
 function add() {
